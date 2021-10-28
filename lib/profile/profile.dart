@@ -56,6 +56,7 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             IconButton(
                               color: Colors.white,
+                              iconSize: 30.0,
                               icon: FaIcon(FontAwesomeIcons.facebook),
                               tooltip: 'Facebook',
                               onPressed: () => launch(
@@ -63,6 +64,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                             IconButton(
                               color: Colors.white,
+                              iconSize: 30.0,
                               icon: FaIcon(FontAwesomeIcons.linkedin),
                               tooltip: 'LinkedIn',
                               onPressed: () => launch(
@@ -70,6 +72,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                             IconButton(
                               color: Colors.white,
+                              iconSize: 30.0,
                               icon: FaIcon(FontAwesomeIcons.github),
                               tooltip: 'GitHub',
                               onPressed: () =>

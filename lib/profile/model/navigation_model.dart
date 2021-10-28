@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavigationModel {
   String title;
@@ -8,9 +9,8 @@ class NavigationModel {
 }
 
 List<NavigationModel> navigationItems = [
-  NavigationModel(title: "Dashboard", icon: Icons.insert_chart),
-  NavigationModel(title: "Errors", icon: Icons.error),
-  NavigationModel(title: "Search", icon: Icons.search),
-  NavigationModel(title: "Notifications", icon: Icons.notifications),
-  NavigationModel(title: "Settings", icon: Icons.settings),
+  NavigationModel(title: "About me", icon: FontAwesomeIcons.userAlt),
+  NavigationModel(title: "My skill", icon: FontAwesomeIcons.book),
+  NavigationModel(title: "Experience", icon: FontAwesomeIcons.userEdit),
+  NavigationModel(title: "Contact me", icon: FontAwesomeIcons.solidCommentDots),
 ];

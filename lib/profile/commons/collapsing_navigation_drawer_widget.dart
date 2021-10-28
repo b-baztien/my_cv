@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_cv/profile/model/navigation_model.dart';
 
 import 'collapsing_list_tile_widget.dart';
@@ -44,14 +45,8 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
         color: Color(0xFF272D34),
         child: Column(
           children: <Widget>[
-            CollapsingListTile(
-              title: 'Techie',
-              icon: Icons.person,
-              animationController: _animationController,
-            ),
-            Divider(
-              color: Colors.grey,
-              height: 40.0,
+            SizedBox(
+              height: 50.0,
             ),
             Expanded(
               child: ListView.separated(
@@ -74,6 +69,19 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 itemCount: navigationItems.length,
               ),
             ),
+            Divider(
+              color: Colors.grey,
+              height: 40.0,
+            ),
+            CollapsingListTile(
+              title: 'Download Resume',
+              icon: FontAwesomeIcons.fileDownload,
+              animationController: _animationController,
+            ),
+            Divider(
+              color: Colors.grey,
+              height: 40.0,
+            ),
             InkWell(
               onTap: () {
                 setState(() {
@@ -87,7 +95,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 icon: AnimatedIcons.close_menu,
                 progress: _animationController,
                 color: Color(0xFF4AC8EA),
-                size: 50.0,
+                size: 40.0,
               ),
             ),
             SizedBox(
