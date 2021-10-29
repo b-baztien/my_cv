@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:my_cv/profile/profile.dart';
 
 class App extends MaterialApp {
-  const App({Key? key})
+  App({Key? key})
       : super(
-            key: key,
-            home: const ProfilePage(),
-            debugShowCheckedModeBanner: false);
+          key: key,
+          home: ProfilePage(),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: 'Prompt'),
+        );
 }

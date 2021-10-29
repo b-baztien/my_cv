@@ -10,6 +10,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final birthday = DateTime(1996, 9, 17);
+    final dateNow = DateTime.now();
+    final difference = dateNow.difference(birthday).inDays;
+
     return BlocProvider(
       create: (context) => ProfileBloc(),
       child: Material(
@@ -37,18 +41,29 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 150.0),
+                    padding: const EdgeInsets.only(bottom: 50.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          child: Text(
-                            'Poomin Yennattee',
-                            textScaleFactor: 3.5,
-                            style: TextStyle(
-                                color: Colors.white,
-                                decoration: TextDecoration.none),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Poomin Yennattee',
+                                textScaleFactor: 3.5,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    decoration: TextDecoration.none),
+                              ),
+                              Text(
+                                'Frontend Developer',
+                                textScaleFactor: 2,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    decoration: TextDecoration.none),
+                              ),
+                            ],
                           ),
                         ),
                         Row(
@@ -85,11 +100,62 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Flexible(
+              Expanded(
                 flex: 60,
-                child: Container(
-                  height: 100,
-                  color: Colors.deepOrange,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 40.0, bottom: 40.0, left: 20.0, right: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'About me',
+                                textScaleFactor: 5,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                    text: (difference / 365)
+                                            .floor()
+                                            .toString() +
+                                        ' years / Bangkok / Frontend Developer',
+                                    style: TextStyle(color: Colors.blue)),
+                                textScaleFactor: 2,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                '''I'm an Angular Google Developer Expert and I'm a big advocate of this framework. I use it for my personal projects as well as my work and I contribute to its open-source ecosystem (see projects below).
+I'm a huge music fan and a musician myself. Naturally I often combine my hobbies as music apps or tools. I believe Web is one of the most exciting areas to work in because of how feature rich and multimedia it is.
+I have two children and my wife and I are Montessori enthusiasts.''',
+                                textScaleFactor: 1.5,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 1000,
+                          color: Colors.blue,
+                        ),
+                        Container(
+                          height: 1000,
+                          color: Colors.yellow,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
