@@ -13,6 +13,7 @@ class ProfilePage extends StatelessWidget {
     final birthday = DateTime(1996, 9, 17);
     final dateNow = DateTime.now();
     final difference = dateNow.difference(birthday).inDays;
+    MediaQueryData media = MediaQuery.of(context);
 
     return BlocProvider(
       create: (context) => ProfileBloc(),
@@ -29,77 +30,79 @@ class ProfilePage extends StatelessWidget {
                   CollapsingNavigationDrawer()
                 ],
               ),
-              Expanded(
-                flex: 35,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/my-photo.jpg'),
-                      fit: BoxFit.fitHeight,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 50.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
+              media.size.width > 600
+                  ? Expanded(
+                      flex: 35,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/my-photo.jpg'),
+                            fit: BoxFit.fitHeight,
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 50.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                'Poomin Yennattee',
-                                textScaleFactor: 3.5,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    decoration: TextDecoration.none),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Poomin Yennattee',
+                                      textScaleFactor: 3.5,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          decoration: TextDecoration.none),
+                                    ),
+                                    Text(
+                                      'Frontend Developer',
+                                      textScaleFactor: 2,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          decoration: TextDecoration.none),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text(
-                                'Frontend Developer',
-                                textScaleFactor: 2,
-                                style: TextStyle(
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
                                     color: Colors.white,
-                                    decoration: TextDecoration.none),
-                              ),
+                                    iconSize: 30.0,
+                                    icon: FaIcon(FontAwesomeIcons.facebook),
+                                    tooltip: 'Facebook',
+                                    onPressed: () => launch(
+                                        'https://www.facebook.com/bas.poomin/'),
+                                  ),
+                                  IconButton(
+                                    color: Colors.white,
+                                    iconSize: 30.0,
+                                    icon: FaIcon(FontAwesomeIcons.linkedin),
+                                    tooltip: 'LinkedIn',
+                                    onPressed: () => launch(
+                                        'https://www.linkedin.com/in/poomin-yennattee/'),
+                                  ),
+                                  IconButton(
+                                    color: Colors.white,
+                                    iconSize: 30.0,
+                                    icon: FaIcon(FontAwesomeIcons.github),
+                                    tooltip: 'GitHub',
+                                    onPressed: () =>
+                                        launch('https://github.com/devilbas07'),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              color: Colors.white,
-                              iconSize: 30.0,
-                              icon: FaIcon(FontAwesomeIcons.facebook),
-                              tooltip: 'Facebook',
-                              onPressed: () => launch(
-                                  'https://www.facebook.com/bas.poomin/'),
-                            ),
-                            IconButton(
-                              color: Colors.white,
-                              iconSize: 30.0,
-                              icon: FaIcon(FontAwesomeIcons.linkedin),
-                              tooltip: 'LinkedIn',
-                              onPressed: () => launch(
-                                  'https://www.linkedin.com/in/poomin-yennattee/'),
-                            ),
-                            IconButton(
-                              color: Colors.white,
-                              iconSize: 30.0,
-                              icon: FaIcon(FontAwesomeIcons.github),
-                              tooltip: 'GitHub',
-                              onPressed: () =>
-                                  launch('https://github.com/devilbas07'),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
               Expanded(
                 flex: 60,
                 child: SingleChildScrollView(
