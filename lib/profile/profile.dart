@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -48,20 +49,23 @@ class ProfilePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
+                              Padding(
+                                padding: EdgeInsets.all(10),
                                 child: Column(
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       'Poomin Yennattee',
-                                      textScaleFactor: 3.5,
+                                      maxLines: 1,
                                       style: TextStyle(
+                                          fontSize: 50,
                                           color: Colors.white,
                                           decoration: TextDecoration.none),
                                     ),
-                                    Text(
+                                    AutoSizeText(
                                       'Frontend Developer',
-                                      textScaleFactor: 2,
+                                      maxLines: 1,
                                       style: TextStyle(
+                                          fontSize: 26,
                                           color: Colors.white,
                                           decoration: TextDecoration.none),
                                     ),
@@ -116,22 +120,22 @@ class ProfilePage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 'About me',
-                                textScaleFactor: 5,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40.0),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Text.rich(
-                                TextSpan(
-                                    text: (difference / 365)
-                                            .floor()
-                                            .toString() +
-                                        ' years / Bangkok / Frontend Developer',
-                                    style: TextStyle(color: Colors.blue)),
-                                textScaleFactor: 2,
+                              AutoSizeText(
+                                (difference / 365).floor().toString() +
+                                    ' years / Bangkok / Frontend Developer',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 24),
+                                maxLines: 2,
                               ),
                               SizedBox(
                                 height: 20,
@@ -140,7 +144,7 @@ class ProfilePage extends StatelessWidget {
                                 '''I'm an Angular Google Developer Expert and I'm a big advocate of this framework. I use it for my personal projects as well as my work and I contribute to its open-source ecosystem (see projects below).
 I'm a huge music fan and a musician myself. Naturally I often combine my hobbies as music apps or tools. I believe Web is one of the most exciting areas to work in because of how feature rich and multimedia it is.
 I have two children and my wife and I are Montessori enthusiasts.''',
-                                textScaleFactor: 1.5,
+                                style: TextStyle(fontSize: 18),
                               ),
                               SizedBox(
                                 height: 20,
