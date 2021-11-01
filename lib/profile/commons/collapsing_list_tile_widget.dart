@@ -37,12 +37,6 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
       child: InkWell(
         onTap: () => {widget.onTap?.call()},
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16.0)),
-            color: widget.isSelected
-                ? Colors.transparent.withOpacity(0.3)
-                : Colors.transparent,
-          ),
           width: widthAnimation.value,
           margin: EdgeInsets.symmetric(horizontal: 8.0),
           padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),

@@ -152,9 +152,46 @@ I have two children and my wife and I are Montessori enthusiasts.''',
                             ],
                           ),
                         ),
+                        Divider(
+                          color: Colors.grey,
+                        ),
                         Container(
-                          height: 1000,
-                          color: Colors.blue,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                'My skill',
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 40.0),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 5.0,
+                                  crossAxisSpacing: 5.0,
+                                ),
+                                itemCount: 9,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(width: 3.0),
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                           height: 1000,

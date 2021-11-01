@@ -78,7 +78,8 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               title: 'Download Resume',
               icon: FontAwesomeIcons.fileDownload,
               animationController: _animationController,
-              onTap: () => launch('https://www.google.com/'),
+              onTap: () => launch(
+                  'https://github.com/devilbas07/my_cv/raw/master/assets/files/POOMIN_RESUME_ENG.pdf'),
             ),
             Divider(
               color: Colors.grey,
