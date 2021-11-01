@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_cv/profile/model/navigation_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'collapsing_list_tile_widget.dart';
 
@@ -25,7 +26,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
     super.initState();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    widthAnimation = Tween<double>(begin: maxWidth, end: minWidth)
+    widthAnimation = Tween<double>(begin: minWidth, end: maxWidth)
         .animate(_animationController);
   }
 
@@ -77,25 +78,30 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               title: 'Download Resume',
               icon: FontAwesomeIcons.fileDownload,
               animationController: _animationController,
+              onTap: () => launch('https://www.google.com/'),
             ),
             Divider(
               color: Colors.grey,
               height: 40.0,
             ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  isCollapsed = !isCollapsed;
-                  isCollapsed
-                      ? _animationController.forward()
-                      : _animationController.reverse();
-                });
-              },
-              child: AnimatedIcon(
-                icon: AnimatedIcons.close_menu,
-                progress: _animationController,
-                color: Color(0xFF4AC8EA),
-                size: 40.0,
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  setState(() {
+                    isCollapsed = !isCollapsed;
+                    isCollapsed
+                        ? _animationController.reverse()
+                        : _animationController.forward();
+                  });
+                },
+                child: AnimatedIcon(
+                  icon: AnimatedIcons.menu_close,
+                  progress: _animationController,
+                  color: Color(0xFF4AC8EA),
+                  size: 40.0,
+                ),
               ),
             ),
             SizedBox(
