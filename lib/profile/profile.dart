@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_cv/profile/bloc/profile_bloc.dart';
 import 'package:my_cv/profile/commons/collapsing_navigation_drawer_widget.dart';
+import 'package:my_cv/profile/widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -15,6 +17,27 @@ class ProfilePage extends StatelessWidget {
     final dateNow = DateTime.now();
     final difference = dateNow.difference(birthday).inDays;
     MediaQueryData media = MediaQuery.of(context);
+    final double width = media.size.width;
+    final double height = media.size.height;
+
+    List<Widget> _listExperienceCard = [
+      CustomWidget.experienceCard(
+        context: context,
+        title: 'จิตวิทยาเชิงบวก',
+        subtitle: '2020',
+        image:
+            'https://play-lh.googleusercontent.com/cxCak95r18YYjAjzvkjydFuPisdIZX3Ue1C69mOmf4jKQaLmug8KmVel8npIlcnxrYfF=s180-rw',
+        url: 'https://play.google.com/store/apps/details?id=com.helloolder.app',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context, text: 'Flutter, Dart', icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'Available in google play store',
+              icon: Icons.description),
+        ],
+      ),
+    ];
 
     return BlocProvider(
       create: (context) => ProfileBloc(),
@@ -31,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                   CollapsingNavigationDrawer()
                 ],
               ),
-              media.size.width > 600
+              width > 600
                   ? Expanded(
                       flex: 35,
                       child: Container(
@@ -193,9 +216,57 @@ I have two children and my wife and I are Montessori enthusiasts.''',
                             ],
                           ),
                         ),
-                        Container(
-                          height: 1000,
-                          color: Colors.yellow,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Divider(
+                              color: Colors.grey,
+                            ),
+                            AutoSizeText(
+                              'Experience',
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40.0,
+                              ),
+                            ),
+                            StaggeredGridView.extent(
+                              maxCrossAxisExtent: 2,
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              mainAxisSpacing: 5.0,
+                              crossAxisSpacing: 5.0,
+                              children: [
+                                new Container(
+                                    color: Colors.green,
+                                    child: new Center(
+                                      child: new CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        child: new Text('1'),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                            Theme(
+                              data: ThemeData.from(
+                                colorScheme: ColorScheme.fromSwatch(
+                                  cardColor: Colors.blue,
+                                  backgroundColor: Colors.blue,
+                                ),
+                              ),
+                              child: StaggeredGridView.count(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 5.0,
+                                crossAxisSpacing: 5.0,
+                                staggeredTiles: _listExperienceCard
+                                    .map((e) => StaggeredTile.fit(1))
+                                    .toList(),
+                                children: _listExperienceCard,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
