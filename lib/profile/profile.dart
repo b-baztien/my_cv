@@ -18,7 +18,6 @@ class ProfilePage extends StatelessWidget {
     final difference = dateNow.difference(birthday).inDays;
     MediaQueryData media = MediaQuery.of(context);
     final double width = media.size.width;
-    final double height = media.size.height;
 
     List<Widget> _listExperienceCard = [
       CustomWidget.experienceCard(
