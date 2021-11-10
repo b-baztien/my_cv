@@ -1,0 +1,20 @@
+{
+    "form": [
+      {
+        "id": "name",
+        "value": "",
+        "type": "text"
+      },
+      {
+        "id": "email",
+        "value": "",
+        "type": "text"
+      },
+      {
+        "id": "gender",
+        "value": "male",
+        "type": "radio"
+      }
+    ]
+  }
+  
