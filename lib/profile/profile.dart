@@ -18,14 +18,16 @@ class ProfilePage extends StatelessWidget {
     final difference = dateNow.difference(birthday).inDays;
     MediaQueryData media = MediaQuery.of(context);
     final double width = media.size.width;
+    final double height = media.size.height;
+
+    final bool isSmallScreen = width < 500;
 
     List<Widget> _listExperienceCard = [
       CustomWidget.experienceCard(
         context: context,
         title: 'จิตวิทยาเชิงบวก',
         subtitle: '2020',
-        image:
-            'https://play-lh.googleusercontent.com/cxCak95r18YYjAjzvkjydFuPisdIZX3Ue1C69mOmf4jKQaLmug8KmVel8npIlcnxrYfF=s180-rw',
+        image: 'assets/images/hello-older.png',
         url: 'https://play.google.com/store/apps/details?id=com.helloolder.app',
         cardDetailWidgets: <Widget>[
           CustomWidget.cardDetails(
@@ -36,6 +38,149 @@ class ProfilePage extends StatelessWidget {
               icon: Icons.description),
         ],
       ),
+    ];
+
+    List<Widget> _listSkillCard = [
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/angular.png')),
+          Text(
+            'Angular',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline5,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/rxjs.png')),
+          Text(
+            'RxJs',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/nestjs.png')),
+          Text(
+            'NestJs',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/java.png')),
+          Text(
+            'Java',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/flutter.png')),
+          Text(
+            'Flutter',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/nx.png')),
+          Text(
+            'Nx',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/typescript.png')),
+          Text(
+            'Typescript',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/firebase.png')),
+          Text(
+            'Firebase',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/dart.png')),
+          Text(
+            'Dart',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/images/skills/c#.png')),
+          Text(
+            'C#',
+            style: isSmallScreen
+                ? Theme.of(context).textTheme.bodyText1
+                : Theme.of(context).textTheme.headline4,
+          ),
+        ],
+      )
     ];
 
     return BlocProvider(
@@ -163,9 +308,7 @@ class ProfilePage extends StatelessWidget {
                                 height: 20,
                               ),
                               Text(
-                                '''I'm an Angular Google Developer Expert and I'm a big advocate of this framework. I use it for my personal projects as well as my work and I contribute to its open-source ecosystem (see projects below).
-I'm a huge music fan and a musician myself. Naturally I often combine my hobbies as music apps or tools. I believe Web is one of the most exciting areas to work in because of how feature rich and multimedia it is.
-I have two children and my wife and I are Montessori enthusiasts.''',
+                                'I am interest in Software Developer whether it be Website Developer because I am interest in Development’s Technology which are widely, it is always make me learn in new thing, I am expert Object-Oriented Programing, I have many responsibility  and patient, I can work in groups and always respect opinions of others',
                                 style: TextStyle(fontSize: 18),
                               ),
                               SizedBox(
@@ -191,23 +334,16 @@ I have two children and my wife and I are Montessori enthusiasts.''',
                               SizedBox(
                                 height: 20,
                               ),
-                              GridView.builder(
+                              StaggeredGridView.count(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 5.0,
-                                  crossAxisSpacing: 5.0,
-                                ),
-                                itemCount: 9,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(width: 3.0),
-                                    ),
-                                  );
-                                },
+                                crossAxisCount: isSmallScreen ? 2 : 3,
+                                mainAxisSpacing: isSmallScreen ? 0 : 100.0,
+                                crossAxisSpacing: 50.0,
+                                staggeredTiles: _listSkillCard
+                                    .map((e) => StaggeredTile.fit(1))
+                                    .toList(),
+                                children: _listSkillCard,
                               ),
                               SizedBox(
                                 height: 20,
@@ -256,7 +392,7 @@ I have two children and my wife and I are Montessori enthusiasts.''',
                               child: StaggeredGridView.count(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                crossAxisCount: 2,
+                                crossAxisCount: width > 1500 ? 2 : 1,
                                 mainAxisSpacing: 5.0,
                                 crossAxisSpacing: 5.0,
                                 staggeredTiles: _listExperienceCard

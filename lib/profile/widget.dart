@@ -26,7 +26,7 @@ class CustomWidget {
               image: image,
               url: url,
             ),
-            CustomWidget.cardDivider,
+            CustomWidget._cardDivider,
             subtitle != null
                 ? Text(
                     subtitle,
@@ -66,7 +66,7 @@ class CustomWidget {
                 ? Container(
                     width: 48,
                     height: 48,
-                    child: Image.network(image),
+                    child: Image.asset(image),
                   )
                 : SizedBox.shrink(),
             Text(
@@ -108,7 +108,7 @@ class CustomWidget {
     );
   }
 
-  static Widget cardDivider = Column(
+  static Widget _cardDivider = Column(
     children: [
       SizedBox(
         height: 10,
@@ -121,4 +121,22 @@ class CustomWidget {
       )
     ],
   );
+
+  static Widget skillCard({
+    required BuildContext context,
+    required String text,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [],
+        ),
+      ),
+    );
+  }
 }
