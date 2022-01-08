@@ -124,19 +124,26 @@ class CustomWidget {
 
   static Widget skillCard({
     required BuildContext context,
-    required String text,
+    required String title,
+    required String image,
   }) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [],
+    MediaQueryData media = MediaQuery.of(context);
+    final double width = media.size.width;
+    final bool isSmallScreen = width <= 1024;
+
+    return Column(
+      children: [
+        Container(
+            width: isSmallScreen ? 50 : 100,
+            height: isSmallScreen ? 50 : 100,
+            child: Image.asset(image)),
+        Text(
+          title,
+          style: isSmallScreen
+              ? Theme.of(context).textTheme.bodyText1
+              : Theme.of(context).textTheme.headline5,
         ),
-      ),
+      ],
     );
   }
 }
