@@ -160,8 +160,9 @@ class ProfilePage extends StatelessWidget {
                                   AutoSizeText(
                                     'Poomin Yennattee',
                                     maxLines: 1,
+                                    minFontSize: 40.0,
+                                    maxFontSize: 50.0,
                                     style: TextStyle(
-                                        fontSize: 50,
                                         decoration: TextDecoration.none),
                                   ),
                                   AutoSizeText(
