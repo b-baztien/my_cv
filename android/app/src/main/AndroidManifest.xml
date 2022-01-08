@@ -2,7 +2,7 @@
     package="com.example.my_cv">
    <application
         android:label="Poomin Yennattee"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
