@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_cv/profile/bloc/profile_bloc.dart';
-import 'package:my_cv/profile/commons/collapsing_navigation_drawer_widget.dart';
 import 'package:my_cv/profile/widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,13 +22,86 @@ class ProfilePage extends StatelessWidget {
     final bool isSmallScreen = width <= 512;
     final bool isMediumScreen = width <= 1024;
     final bool isLargeScreen = width > 1024;
+    final ScrollController controller = ScrollController();
 
     List<Widget> _listExperienceCard = [
       CustomWidget.experienceCard(
         context: context,
-        title: 'จิตวิทยาเชิงบวก',
+        title:
+            'Full stack Developer Outsource AIS (Existing Payment): Epic Consulting Ltd.',
+        subtitle: '2021, August – Present',
+        image: 'assets/images/experiences/ais.png',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'Angular, RxJs, Java, SpringBoots',
+              icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text:
+                  'Develope New Prepaaid Payment web applciation with Angular and SpringBoot',
+              icon: Icons.description),
+        ],
+      ),
+      CustomWidget.experienceCard(
+        context: context,
+        title:
+            'Windows Presentation Foundationand C# Developer: CDG System (CDGS)',
+        subtitle: '2020 – 2021, August',
+        image: 'assets/images/experiences/cdgs.png',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context, text: 'C#, .Net 5', icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text:
+                  'Frontend window application design and development with Windows Presentation Foundationand (WPF)',
+              icon: Icons.description),
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'Build center WPF UserControl in project',
+              icon: Icons.description),
+        ],
+      ),
+      CustomWidget.experienceCard(
+        context: context,
+        title: 'Lecturer | React & NestJs: Rajabhat Suan Sunandha University',
         subtitle: '2020',
-        image: 'assets/images/hello-older.png',
+        image: 'assets/images/experiences/nestjs.png',
+        url:
+            'https://youtube.com/playlist?list=PLI_imISwfpmm74G3EHuBnUnU6pcBli8fT',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context, text: 'JavaScript, NestJs', icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text:
+                  'Guide students about JavaScript and NestJs through activities that allow them to apply programming languages to write code and design programs',
+              icon: Icons.description),
+        ],
+      ),
+      CustomWidget.experienceCard(
+        context: context,
+        title: 'Freelance Developer: PTE Engineering, V Think Solution',
+        subtitle: '2019 - 2020',
+        image: 'assets/images/experiences/vthink.png',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'JSP, JSF, SpringBoots, JQuery, PrimeFace',
+              icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text:
+                  'Develope AsGuard web applciation with Angular and SpringBoot',
+              icon: Icons.description),
+        ],
+      ),
+      CustomWidget.experienceCard(
+        context: context,
+        title: 'Application Development จิตวิทยาเชิงบวก',
+        subtitle: '2020',
+        image: 'assets/images/experiences/hello-older.png',
         url: 'https://play.google.com/store/apps/details?id=com.helloolder.app',
         cardDetailWidgets: <Widget>[
           CustomWidget.cardDetails(
@@ -185,6 +257,7 @@ class ProfilePage extends StatelessWidget {
                   flex: 60,
                   child: Scaffold(
                     body: NestedScrollView(
+                      controller: controller,
                       headerSliverBuilder:
                           (BuildContext context, bool innerBoxIsScrolled) =>
                               <Widget>[
@@ -300,7 +373,7 @@ class ProfilePage extends StatelessWidget {
                                     Theme(
                                       data: ThemeData.from(
                                         colorScheme: ColorScheme.fromSwatch(
-                                          cardColor: Color(0xFFbbdefb),
+                                          cardColor: Colors.blue[100],
                                           backgroundColor: Colors.blue,
                                         ),
                                       ),
@@ -361,8 +434,8 @@ class ProfilePage extends StatelessWidget {
                                   Theme(
                                     data: ThemeData.from(
                                       colorScheme: ColorScheme.fromSwatch(
-                                        cardColor: Colors.blue,
-                                        backgroundColor: Colors.blue,
+                                        cardColor: Colors.green[200],
+                                        backgroundColor: Colors.green[200],
                                       ),
                                     ),
                                     child: StaggeredGridView.count(

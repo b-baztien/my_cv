@@ -1,7 +1,23 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomWidget {
+  static final cardColors = [
+    Colors.green[200],
+    Colors.blue[200],
+    Colors.red[200],
+    Colors.purple[200],
+    Colors.pink[200],
+    Colors.cyan[200],
+    Colors.teal[200],
+    Colors.indigo[200],
+    Colors.deepOrange[200],
+    Colors.brown[200],
+    Colors.blueGrey[200],
+  ];
+
   static Widget experienceCard(
       {required BuildContext context,
       required String title,
@@ -9,38 +25,49 @@ class CustomWidget {
       String? image,
       String? url,
       List<Widget>? cardDetailWidgets}) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+    int randomIndexColor = Random().nextInt(cardColors.length);
+
+    return Theme(
+      data: ThemeData.from(
+        colorScheme: ColorScheme.fromSwatch(
+          cardColor: cardColors[randomIndexColor],
+          backgroundColor: cardColors[randomIndexColor],
+        ),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            cardTitle(
-              context: context,
-              image: image,
-              url: url,
-            ),
-            CustomWidget._cardDivider,
-            subtitle != null
-                ? Text(
-                    subtitle,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          color: Colors.white,
-                        ),
-                  )
-                : SizedBox.shrink(),
-            cardDetailWidgets != null
-                ? Column(
-                    children: cardDetailWidgets,
-                  )
-                : SizedBox.shrink(),
-          ],
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              cardTitle(
+                context: context,
+                title: title,
+                image: image,
+                url: url,
+              ),
+              CustomWidget._cardDivider,
+              subtitle != null
+                  ? Text(
+                      subtitle,
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            color: Colors.white,
+                          ),
+                    )
+                  : SizedBox.shrink(),
+              cardDetailWidgets != null
+                  ? Column(
+                      children: cardDetailWidgets,
+                    )
+                  : SizedBox.shrink(),
+            ],
+          ),
         ),
       ),
     );
@@ -48,6 +75,7 @@ class CustomWidget {
 
   static Widget cardTitle({
     required BuildContext context,
+    required String title,
     String? image,
     String? url,
   }) {
@@ -57,30 +85,41 @@ class CustomWidget {
         cursor: url != null
             ? SystemMouseCursors.click
             : SystemMouseCursors.contextMenu,
-        child: Wrap(
-          spacing: 10,
-          direction: Axis.horizontal,
-          crossAxisAlignment: WrapCrossAlignment.center,
+        child: Row(
           children: [
-            image != null
-                ? Container(
-                    width: 48,
-                    height: 48,
-                    child: Image.asset(image),
-                  )
-                : SizedBox.shrink(),
-            Text(
-              'จิตวิทยาเชิงบวก',
-              style: Theme.of(context).textTheme.headline5?.copyWith(
-                    color: Colors.white,
+            if (image != null)
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  child: Image.asset(image),
+                ),
+              ),
+            Expanded(
+              flex: 4,
+              child: Wrap(
+                spacing: 1,
+                direction: Axis.horizontal,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
+                ],
+              ),
             ),
-            url != null
-                ? Icon(
-                    Icons.open_in_new,
-                    color: Colors.white,
-                  )
-                : SizedBox.shrink(),
+            if (url != null)
+              Tooltip(
+                message: 'Open url',
+                child: Icon(
+                  Icons.open_in_new,
+                  color: Colors.white,
+                ),
+              ),
           ],
         ),
       ),
