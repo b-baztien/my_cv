@@ -79,6 +79,14 @@ class CustomWidget {
     String? image,
     String? url,
   }) {
+    MediaQueryData media = MediaQuery.of(context);
+    final double width = media.size.width;
+
+    final bool isExtraSmallScreen = width <= 350;
+    final bool isSmallScreen = width > 350 && width <= 1024;
+    final bool isMediumScreen = width > 1024 && width < 1366;
+    final bool isLargeScreen = width >= 1366;
+
     return ListTile(
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
@@ -100,9 +108,13 @@ class CustomWidget {
           : SizedBox.shrink(),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline6?.copyWith(
-              color: Colors.white,
-            ),
+        style: isSmallScreen || isExtraSmallScreen
+            ? Theme.of(context).textTheme.bodyText1?.copyWith(
+                  color: Colors.white,
+                )
+            : Theme.of(context).textTheme.headline6?.copyWith(
+                  color: Colors.white,
+                ),
       ),
       trailing: url != null
           ? Tooltip(
@@ -180,7 +192,7 @@ class CustomWidget {
             child: Image.asset(image)),
         Text(
           title,
-          style: isSmallScreen
+          style: isExtraSmallScreen || isSmallScreen
               ? Theme.of(context).textTheme.bodyText1
               : Theme.of(context).textTheme.headline5,
         ),

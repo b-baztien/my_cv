@@ -30,7 +30,7 @@ class ProfilePage extends StatelessWidget {
       CustomWidget.experienceCard(
         context: context,
         title:
-            'Full stack Developer Outsource AIS (Existing Payment): Epic Consulting Ltd.',
+            'Full stack Developer Outsource AIS (Existing Payment): Epic Consulting Co., Ltd.',
         subtitle: '2021, August – Present',
         image: 'assets/images/experiences/ais.png',
         cardDetailWidgets: <Widget>[
@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
           CustomWidget.cardDetails(
               context: context,
               text:
-                  'Develope New Prepaaid Payment web applciation with Angular and SpringBoot',
+                  'Develope New Prepaid Payment web applciation with Angular and SpringBoot',
               icon: Icons.description),
         ],
       ),
@@ -398,13 +398,20 @@ class ProfilePage extends StatelessWidget {
                                               BorderRadius.circular(10),
                                         ),
                                         child: Padding(
-                                          padding: isMediumScreen
-                                              ? EdgeInsets.only(top: 30.0)
-                                              : EdgeInsets.only(
-                                                  top: 90.0,
-                                                  left: 50.0,
-                                                  right: 50.0,
-                                                ),
+                                          padding: isSmallScreen ||
+                                                  isExtraSmallScreen
+                                              ? EdgeInsets.only(
+                                                  top: 40,
+                                                  left: 10,
+                                                  right: 10,
+                                                  bottom: 0)
+                                              : isMediumScreen
+                                                  ? EdgeInsets.only(top: 30.0)
+                                                  : EdgeInsets.only(
+                                                      top: 90.0,
+                                                      left: 50.0,
+                                                      right: 50.0,
+                                                    ),
                                           child: GridView.count(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
@@ -452,7 +459,10 @@ class ProfilePage extends StatelessWidget {
                                     child: StaggeredGridView.count(
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      crossAxisCount: isSmallScreen ? 1 : 2,
+                                      crossAxisCount:
+                                          isExtraSmallScreen || isSmallScreen
+                                              ? 1
+                                              : 2,
                                       mainAxisSpacing: 5.0,
                                       crossAxisSpacing: 5.0,
                                       staggeredTiles: _listExperienceCard
