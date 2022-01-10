@@ -19,9 +19,11 @@ class ProfilePage extends StatelessWidget {
     final double width = media.size.width;
     final double height = media.size.height;
 
-    final bool isSmallScreen = width <= 512;
-    final bool isMediumScreen = width <= 1024;
-    final bool isLargeScreen = width > 1024;
+    final bool isExtraSmallScreen = width <= 350;
+    final bool isSmallScreen = width > 350 && width <= 1024;
+    final bool isMediumScreen = width > 1024 && width < 1366;
+    final bool isLargeScreen = width >= 1366;
+
     final ScrollController controller = ScrollController();
 
     List<Widget> _listExperienceCard = [
@@ -66,7 +68,7 @@ class ProfilePage extends StatelessWidget {
       CustomWidget.experienceCard(
         context: context,
         title: 'Lecturer | React & NestJs: Rajabhat Suan Sunandha University',
-        subtitle: '2020',
+        subtitle: '2021, May',
         image: 'assets/images/experiences/nestjs.png',
         url:
             'https://youtube.com/playlist?list=PLI_imISwfpmm74G3EHuBnUnU6pcBli8fT',
@@ -177,6 +179,12 @@ class ProfilePage extends StatelessWidget {
         ),
         IconButton(
           iconSize: 30.0,
+          icon: FaIcon(FontAwesomeIcons.solidEnvelope),
+          tooltip: 'Mail to me',
+          onPressed: () => launch('mailto:poomin.yennattee@gmail.com'),
+        ),
+        IconButton(
+          iconSize: 30.0,
           icon: FaIcon(FontAwesomeIcons.fileDownload),
           tooltip: 'Resume',
           onPressed: () => launch(
@@ -189,126 +197,133 @@ class ProfilePage extends StatelessWidget {
       create: (context) => ProfileBloc(),
       child: Material(
         child: IntrinsicHeight(
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Stack(
-                //   children: <Widget>[
-                //     Container(
-                //       color: Color(0xFF4AC8EA),
-                //     ),
-                //     CollapsingNavigationDrawer()
-                //   ],
-                // ),
-                if (isLargeScreen)
-                  Expanded(
-                    flex: 35,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/my-photo-light.png'),
-                          fit: BoxFit.fitHeight,
-                          alignment: Alignment.center,
-                        ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Stack(
+              //   children: <Widget>[
+              //     Container(
+              //       color: Color(0xFF4AC8EA),
+              //     ),
+              //     CollapsingNavigationDrawer()
+              //   ],
+              // ),
+              if (isMediumScreen || isLargeScreen)
+                Expanded(
+                  flex: 35,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/my-photo-light.png'),
+                        fit: BoxFit.fitHeight,
+                        alignment: Alignment.center,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 50.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 50.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                AutoSizeText(
+                                  'Poomin Yennattee',
+                                  maxLines: 1,
+                                  minFontSize: 40.0,
+                                  maxFontSize: 50.0,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      ?.merge(TextStyle(
+                                          color: Colors.black,
+                                          decoration: TextDecoration.none)),
+                                ),
+                                AutoSizeText(
+                                  'Frontend Developer',
+                                  maxLines: 1,
+                                  style: Theme.of(context).textTheme.headline5,
+                                ),
+                              ],
+                            ),
+                          ),
+                          _listIconProfile
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              Expanded(
+                flex: 60,
+                child: Scaffold(
+                  body: NestedScrollView(
+                    controller: controller,
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) =>
+                            <Widget>[
+                      if (isExtraSmallScreen || isSmallScreen)
+                        SliverAppBar(
+                          pinned: true,
+                          floating: false,
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          expandedHeight:
+                              isMediumScreen ? height / 1.7 : height / 2,
+                          automaticallyImplyLeading: false,
+                          flexibleSpace: FlexibleSpaceBar(
+                            collapseMode: CollapseMode.parallax,
+                            background: ShaderMask(
+                              shaderCallback: (rect) {
+                                return LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.black, Colors.transparent],
+                                ).createShader(Rect.fromLTRB(
+                                    0, rect.height / 1.5, 0, rect.height));
+                              },
+                              blendMode: BlendMode.dstIn,
+                              child: Image.asset(
+                                'assets/images/my-photo-light.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          bottom: PreferredSize(
+                            preferredSize: const Size.fromHeight(80.0),
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 15.0),
                               child: Column(
                                 children: [
                                   AutoSizeText(
                                     'Poomin Yennattee',
                                     maxLines: 1,
-                                    minFontSize: 40.0,
-                                    maxFontSize: 50.0,
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none),
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
                                   ),
                                   AutoSizeText(
                                     'Frontend Developer',
                                     maxLines: 1,
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        decoration: TextDecoration.none),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
                                   ),
+                                  _listIconProfile,
                                 ],
                               ),
                             ),
-                            _listIconProfile
-                          ],
+                          ),
+                        ),
+                    ],
+                    body: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/background.jpg"),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                  ),
-                Expanded(
-                  flex: 60,
-                  child: Scaffold(
-                    body: NestedScrollView(
-                      controller: controller,
-                      headerSliverBuilder:
-                          (BuildContext context, bool innerBoxIsScrolled) =>
-                              <Widget>[
-                        if (isMediumScreen)
-                          SliverAppBar(
-                            pinned: true,
-                            floating: false,
-                            elevation: 0,
-                            backgroundColor: Colors.white,
-                            expandedHeight:
-                                isMediumScreen ? height / 1.7 : height / 2,
-                            automaticallyImplyLeading: false,
-                            flexibleSpace: FlexibleSpaceBar(
-                              collapseMode: CollapseMode.parallax,
-                              background: ShaderMask(
-                                shaderCallback: (rect) {
-                                  return LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [Colors.black, Colors.transparent],
-                                  ).createShader(Rect.fromLTRB(
-                                      0, rect.height / 1.5, 0, rect.height));
-                                },
-                                blendMode: BlendMode.dstIn,
-                                child: Image.asset(
-                                  'assets/images/my-photo-light.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            bottom: PreferredSize(
-                              preferredSize: const Size.fromHeight(50.0),
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 15.0),
-                                child: Column(
-                                  children: [
-                                    AutoSizeText(
-                                      'Poomin Yennattee',
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          decoration: TextDecoration.none),
-                                    ),
-                                    _listIconProfile,
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                      body: SingleChildScrollView(
+                      child: SingleChildScrollView(
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: 40.0, bottom: 30.0, left: 20.0, right: 20.0),
@@ -384,27 +399,23 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                         child: Padding(
                                           padding: isMediumScreen
-                                              ? EdgeInsets.only(
-                                                  top: 30.0, bottom: 10.0)
+                                              ? EdgeInsets.only(top: 30.0)
                                               : EdgeInsets.only(
                                                   top: 90.0,
                                                   left: 50.0,
                                                   right: 50.0,
-                                                  bottom: 10.0),
-                                          child: StaggeredGridView.count(
+                                                ),
+                                          child: GridView.count(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
-                                            crossAxisCount:
-                                                isSmallScreen ? 2 : 3,
-                                            mainAxisSpacing:
-                                                isSmallScreen ? 20 : 50.0,
-                                            crossAxisSpacing:
-                                                isSmallScreen ? 0 : 50.0,
-                                            staggeredTiles: _listSkillCard
-                                                .map(
-                                                    (e) => StaggeredTile.fit(1))
-                                                .toList(),
+                                            crossAxisCount: isExtraSmallScreen
+                                                ? 2
+                                                : isSmallScreen
+                                                    ? 3
+                                                    : 4,
+                                            mainAxisSpacing: 0,
+                                            crossAxisSpacing: 0,
                                             children: _listSkillCard,
                                           ),
                                         ),
@@ -459,8 +470,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

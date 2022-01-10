@@ -79,50 +79,40 @@ class CustomWidget {
     String? image,
     String? url,
   }) {
-    return GestureDetector(
+    return ListTile(
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      selectedColor: Colors.transparent,
+      selectedTileColor: Colors.transparent,
+      mouseCursor: url != null
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.contextMenu,
       onTap: () => url != null ? launch(url) : {},
-      child: MouseRegion(
-        cursor: url != null
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.contextMenu,
-        child: Row(
-          children: [
-            if (image != null)
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: 64,
-                  height: 64,
-                  child: Image.asset(image),
-                ),
-              ),
-            Expanded(
-              flex: 4,
-              child: Wrap(
-                spacing: 1,
-                direction: Axis.horizontal,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                ],
-              ),
+      minLeadingWidth: 0,
+      minVerticalPadding: 0,
+      contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      leading: image != null
+          ? Container(
+              width: 64,
+              height: 64,
+              child: Image.asset(image),
+            )
+          : SizedBox.shrink(),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headline6?.copyWith(
+              color: Colors.white,
             ),
-            if (url != null)
-              Tooltip(
-                message: 'Open url',
-                child: Icon(
-                  Icons.open_in_new,
-                  color: Colors.white,
-                ),
-              ),
-          ],
-        ),
       ),
+      trailing: url != null
+          ? Tooltip(
+              message: 'Open url',
+              child: Icon(
+                Icons.open_in_new,
+                color: Colors.white,
+              ),
+            )
+          : SizedBox.shrink(),
     );
   }
 
@@ -168,13 +158,25 @@ class CustomWidget {
   }) {
     MediaQueryData media = MediaQuery.of(context);
     final double width = media.size.width;
-    final bool isSmallScreen = width <= 1024;
+
+    final bool isExtraSmallScreen = width <= 350;
+    final bool isSmallScreen = width > 350 && width <= 1024;
+    final bool isMediumScreen = width > 1024 && width < 1366;
+    final bool isLargeScreen = width >= 1366;
 
     return Column(
       children: [
         Container(
-            width: isSmallScreen ? 50 : 100,
-            height: isSmallScreen ? 50 : 100,
+            width: isExtraSmallScreen || isSmallScreen
+                ? 50
+                : isMediumScreen
+                    ? 70
+                    : 100,
+            height: isExtraSmallScreen || isSmallScreen
+                ? 50
+                : isMediumScreen
+                    ? 70
+                    : 100,
             child: Image.asset(image)),
         Text(
           title,
