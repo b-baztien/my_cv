@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
   Stream<String> _imageProfileStream() async* {
     while (true) {
       yield _listProfileImage[0];
-      await Future.delayed(Duration(seconds: _random.nextInt(10)));
+      await Future.delayed(Duration(seconds: _random.nextInt(4) + 1));
       yield _listProfileImage[1];
       await Future.delayed(Duration(milliseconds: 300));
     }
