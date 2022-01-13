@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +10,23 @@ import 'package:my_cv/profile/widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
+
+  static List<String> _listProfileImage = [
+    'assets/images/my-photo-light.png',
+    'assets/images/my-photo-light-close-eye.png'
+  ];
+
+  final Random _random = Random();
+
+  Stream<String> _imageProfileStream() async* {
+    while (true) {
+      yield _listProfileImage[0];
+      await Future.delayed(Duration(seconds: _random.nextInt(10)));
+      yield _listProfileImage[1];
+      await Future.delayed(Duration(milliseconds: 300));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -211,50 +229,58 @@ class ProfilePage extends StatelessWidget {
               if (isMediumScreen || isLargeScreen)
                 Expanded(
                   flex: 35,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/my-photo-light.png'),
-                        fit: BoxFit.fitHeight,
-                        alignment: Alignment.center,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 50.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
+                  child: StreamBuilder<String>(
+                      stream: _imageProfileStream(),
+                      builder: (context, snapshot) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  snapshot.data ?? _listProfileImage[0]),
+                              fit: BoxFit.fitHeight,
+                              alignment: Alignment.center,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 50.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                AutoSizeText(
-                                  'Poomin Yennattee',
-                                  maxLines: 1,
-                                  minFontSize: 40.0,
-                                  maxFontSize: 50.0,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline4
-                                      ?.merge(TextStyle(
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none)),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    children: [
+                                      AutoSizeText(
+                                        'Poomin Yennattee',
+                                        maxLines: 1,
+                                        minFontSize: 40.0,
+                                        maxFontSize: 50.0,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4
+                                            ?.merge(TextStyle(
+                                                color: Colors.black,
+                                                decoration:
+                                                    TextDecoration.none)),
+                                      ),
+                                      AutoSizeText(
+                                        'Frontend Developer',
+                                        maxLines: 1,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline5,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                AutoSizeText(
-                                  'Frontend Developer',
-                                  maxLines: 1,
-                                  style: Theme.of(context).textTheme.headline5,
-                                ),
+                                _listIconProfile
                               ],
                             ),
                           ),
-                          _listIconProfile
-                        ],
-                      ),
-                    ),
-                  ),
+                        );
+                      }),
                 ),
               Expanded(
                 flex: 60,
@@ -285,10 +311,14 @@ class ProfilePage extends StatelessWidget {
                                     0, rect.height / 1.5, 0, rect.height));
                               },
                               blendMode: BlendMode.dstIn,
-                              child: Image.asset(
-                                'assets/images/my-photo-light.png',
-                                fit: BoxFit.cover,
-                              ),
+                              child: StreamBuilder<String>(
+                                  stream: _imageProfileStream(),
+                                  builder: (context, snapshot) {
+                                    return Image.asset(
+                                      snapshot.data ?? _listProfileImage[0],
+                                      fit: BoxFit.cover,
+                                    );
+                                  }),
                             ),
                           ),
                           bottom: PreferredSize(
