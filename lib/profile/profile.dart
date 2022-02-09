@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
       yield _listProfileImage[0];
       await Future.delayed(Duration(seconds: _random.nextInt(4) + 1));
       yield _listProfileImage[1];
-      await Future.delayed(Duration(milliseconds: 300));
+      await Future.delayed(Duration(milliseconds: 100));
     }
   }
 
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
           CustomWidget.cardDetails(
               context: context,
               text:
-                  'Develope New Prepaid Payment web applciation with Angular and SpringBoot',
+                  'Develope New Prepaid Payment web application with Angular and SpringBoot',
               icon: Icons.description),
         ],
       ),
@@ -113,7 +113,7 @@ class ProfilePage extends StatelessWidget {
           CustomWidget.cardDetails(
               context: context,
               text:
-                  'Develope AsGuard web applciation with Angular and SpringBoot',
+                  'Develope AsGuard web application with Angular and SpringBoot',
               icon: Icons.description),
         ],
       ),
@@ -206,11 +206,10 @@ class ProfilePage extends StatelessWidget {
           icon: FaIcon(FontAwesomeIcons.fileDownload),
           tooltip: 'Resume',
           onPressed: () => launch(
-              'https://github.com/devilbas07/my_cv/raw/master/assets/files/POOMIN_RESUME_ENG.pdf'),
+              'https://github.com/devilbas07/my_cv/raw/master/assets/files/POOMIN_RESUME.pdf'),
         ),
       ],
     );
-
     return BlocProvider(
       create: (context) => ProfileBloc(),
       child: Material(

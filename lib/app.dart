@@ -9,6 +9,9 @@ class App extends MaterialApp {
           title: 'Poomin Yennattee',
           home: ProfilePage(),
           debugShowCheckedModeBanner: false,
+          // darkTheme: ThemeData(
+          //   brightness: Brightness.dark,
+          // ),
           theme: ThemeData(
             fontFamily: 'Prompt',
             textTheme: TextTheme(

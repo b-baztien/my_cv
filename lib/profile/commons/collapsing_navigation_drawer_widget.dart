@@ -79,7 +79,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               icon: FontAwesomeIcons.fileDownload,
               animationController: _animationController,
               onTap: () => launch(
-                  'https://github.com/devilbas07/my_cv/raw/master/assets/files/POOMIN_RESUME_ENG.pdf'),
+                  'https://github.com/devilbas07/my_cv/raw/master/assets/files/POOMIN_RESUME.pdf'),
             ),
             Divider(
               color: Colors.grey,
