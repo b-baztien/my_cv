@@ -47,6 +47,23 @@ class ProfilePage extends StatelessWidget {
     List<Widget> _listExperienceCard = [
       CustomWidget.experienceCard(
         context: context,
+        title: 'Software Engineer: Kasikorn Business Technology Group',
+        subtitle: '2022, April – Present',
+        image: 'assets/images/experiences/kbtg.png',
+        url: 'https://www.kbtg.tech/',
+        cardDetailWidgets: <Widget>[
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'Microsoft Sharepoint, JQuery, Angular CLI, RxJs, ReactJs',
+              icon: Icons.code),
+          CustomWidget.cardDetails(
+              context: context,
+              text: 'Developed an Kasikorn bank website',
+              icon: Icons.description),
+        ],
+      ),
+      CustomWidget.experienceCard(
+        context: context,
         title:
             'Full stack Developer Outsource AIS (Existing Payment): Epic Consulting Co., Ltd.',
         subtitle: '2021, August – Present',
