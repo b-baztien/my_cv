@@ -66,7 +66,7 @@ class ProfilePage extends StatelessWidget {
         context: context,
         title:
             'Full stack Developer Outsource AIS (Existing Payment): Epic Consulting Co., Ltd.',
-        subtitle: '2021, August – Present',
+        subtitle: '2021, August – 2022, April',
         image: 'assets/images/experiences/ais.png',
         cardDetailWidgets: <Widget>[
           CustomWidget.cardDetails(
